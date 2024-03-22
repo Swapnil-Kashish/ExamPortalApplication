@@ -18,7 +18,7 @@ public interface QuizService {
 
 
     public void  deleteQuiz(Long qId);
-
+//    Service to get quiz from category
 
     public List<Quiz> getQuizzesOfCategory(Category category);
 
