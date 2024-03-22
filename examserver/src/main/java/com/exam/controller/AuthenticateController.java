@@ -4,6 +4,7 @@ import com.exam.config.JwtUtils;
 import com.exam.model.JwtRequest;
 import com.exam.model.JwtToken;
 import com.exam.model.User;
+import com.exam.repo.UserRepository;
 import com.exam.service.implementation.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,10 +12,13 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
 import java.security.Principal;
+import java.util.Optional;
+
 
 @RestController
 @CrossOrigin("*")
@@ -25,7 +29,10 @@ public class AuthenticateController {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
     @Autowired
+    private UserRepository userRepository;
+    @Autowired
     private JwtUtils jwtUtils;
+
 
 
     //API to generate Token
@@ -58,10 +65,21 @@ public class AuthenticateController {
     }
 
     @GetMapping("/current-user")
+
+    //Principal principal
     public User getCurrentUser(Principal principal) {
-        return (User) this.userDetailsService.loadUserByUsername (principal.getName());
+
+//        if (principal != null) {
+//            return ((User) this.userDetailsService.loadUserByUsername(principal.getName()));
+//        } else {
+//            return null;
+//        }
+        return (User) Optional.ofNullable(principal)
+                .map(Principal::getName)
+                .map(this.userDetailsService::loadUserByUsername).orElse(null);
+        }
 
     }
 
 
-}
+

@@ -10,10 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class QuizServiceImpl implements QuizService {
-    @Override
-    public List<Quiz> getQuizzesOfCategory(Category category) {
-        return this.quizRepository.findByCategory(category);
-    }
+
 
     @Autowired
     private QuizRepository quizRepository;
@@ -38,9 +35,24 @@ public class QuizServiceImpl implements QuizService {
     }
 
     @Override
-    public void deleteQuiz(Long quizId) {
+    public void deleteQuiz(Long qId) {
 
-        this.quizRepository.deleteById(quizId);
+        this.quizRepository.deleteById(qId);
 
     }
+
+    @Override
+    public List<Quiz> getQuizzesOfCategory(Category category) {
+        return this.quizRepository.findByCategory(category);
+    }
+    @Override
+    public List<Quiz> getActiveQuizzes() {
+        return this.quizRepository.findByActive(true);
+    }
+
+    @Override
+    public List<Quiz> getActiveQuizzesOfCategory(Category c) {
+        return this.quizRepository.findByCategoryAndActive(c,true);
+    }
+
 }

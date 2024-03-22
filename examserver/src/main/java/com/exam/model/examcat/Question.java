@@ -16,7 +16,7 @@ public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long quesId;
+    public Long quesId;
 
     @Column(length = 5000)
     private String content;

@@ -18,7 +18,7 @@ import java.util.Set;
 public class Quiz {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long qId;
+    public Long qId;
 
     private String title;
 

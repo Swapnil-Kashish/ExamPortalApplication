@@ -37,9 +37,9 @@ public class QuizController {
         return  quizService.updateQuiz(quiz);
     }
 
-    @DeleteMapping("/{quizId}")
-    public void deleteQuiz(@PathVariable("quizId") Long quizId){
-        quizService.deleteQuiz(quizId);
+    @DeleteMapping("/{qId}")
+    public void deleteQuiz(@PathVariable("qId") Long qId){
+        quizService.deleteQuiz(qId);
     }
 
     @GetMapping("/category/{cid}")
@@ -50,5 +50,14 @@ public class QuizController {
         return  this.quizService.getQuizzesOfCategory(category);
 
     }
-
+    @GetMapping("/active")
+    public List<Quiz> getActiveQuizzes(){
+         return  this.quizService.getActiveQuizzes();
+    }
+    @GetMapping("/active/{cid}")
+    public List<Quiz> getActiveQuizzesOfCategory(@PathVariable("cid") Long cid){
+        Category category = new Category();
+        category.setCid(cid);
+        return  this.quizService.getActiveQuizzesOfCategory(category);
+    }
 }
