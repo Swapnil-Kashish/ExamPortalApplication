@@ -13,8 +13,8 @@
   <a
     *ngIf="!isLoggedIn"
     [routerLink]="'/login'"
-    mat-icon-button
-    class="example-icon favorite-icon"
+    mat-button
+    class="example-icon favorite-icon ml20"
     aria-label="Example icon-button with heart icon"
   >
     Login
@@ -23,8 +23,8 @@
   <a
     *ngIf="!isLoggedIn"
     [routerLink]="'/signup'"
-    mat-icon-button
-    class="example-icon favorite-icon mr20 ml20"
+    mat-button
+    class="example-icon favorite-icon mr20"
     aria-label="Example icon-button with heart icon"
   >
     Register
@@ -33,8 +33,8 @@
   <a
     (click)="logout()"
     *ngIf="isLoggedIn"
-    mat-icon-button
-    class="example-icon favorite-icon mr20 ml20"
+    mat-button
+    class="example-icon favorite-icon ml20"
     aria-label="Example icon-button with heart icon"
   >
     Logout
@@ -42,7 +42,7 @@
 
   <button
     *ngIf="isLoggedIn && user"
-    class="example-icon favorite-icon ml20"
+    class="example-icon favorite-icon mr20"
     mat-button
     routerLink="/admin/profile"
     aria-label="Example icon-button with heart icon"
